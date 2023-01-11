@@ -25,28 +25,28 @@ module "vpc" {
 #   }
 # }
 
-# resource "aws_security_group" "rds" {
-#   name   = "education_rds"
-#   vpc_id = module.vpc.vpc_id
+resource "aws_security_group" "sg" {
+  name   = "demo-sg"
+  vpc_id = module.vpc.vpc_id
 
-#   ingress {
-#     from_port   = 5432
-#     to_port     = 5432
-#     protocol    = "tcp"
-#     cidr_blocks = ["192.80.0.0/16"]
-#   }
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["192.80.0.0/16"]
+  }
 
-#   egress {
-#     from_port   = 5432
-#     to_port     = 5432
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
+  egress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-#   tags = {
-#     Name = "education_rds"
-#   }
-# }
+  tags = {
+    Name = "demo-sg"
+  }
+}
 
 # resource "aws_db_parameter_group" "education" {
 #   name   = "education"

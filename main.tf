@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-2"
+  region = var.region
 }
 
 data "aws_availability_zones" "available" {}
@@ -8,7 +8,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.77.0"
 
-  name                 = "education"
+  name                 = var.vpc_name
   cidr                 = "10.0.0.0/16"
   azs                  = data.aws_availability_zones.available.names
   public_subnets       = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
@@ -44,7 +44,7 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = "demo-sg"
+    Name = var.sg_name
   }
 }
 

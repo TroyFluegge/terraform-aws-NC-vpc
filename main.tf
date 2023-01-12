@@ -7,7 +7,7 @@ data "aws_availability_zones" "available" {}
 provider "random" {}
 
 resource "random_pet" "random" {
-  length = 1
+  length = 2
 }
 
 module "vpc" {

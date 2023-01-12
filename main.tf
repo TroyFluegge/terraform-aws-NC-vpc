@@ -4,6 +4,12 @@ provider "aws" {
 
 data "aws_availability_zones" "available" {}
 
+provider "random" {}
+
+resource "random_pet" "random" {
+  length = 1
+}
+
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.77.0"
@@ -15,15 +21,6 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 }
-
-# resource "aws_db_subnet_group" "education" {
-#   name       = "education"
-#   subnet_ids = module.vpc.public_subnets
-
-#   tags = {
-#     Name = "Education"
-#   }
-# }
 
 resource "aws_security_group" "sg" {
   name   = "demo-sg"
@@ -48,6 +45,15 @@ resource "aws_security_group" "sg" {
   }
 }
 
+# resource "aws_db_subnet_group" "education" {
+#   name       = "education"
+#   subnet_ids = module.vpc.public_subnets
+
+#   tags = {
+#     Name = "Education"
+#   }
+# }
+  
 # resource "aws_db_parameter_group" "education" {
 #   name   = "education"
 #   family = "postgres14"
@@ -56,12 +62,6 @@ resource "aws_security_group" "sg" {
 #     name  = "log_connections"
 #     value = "1"
 #   }
-# }
-
-# provider "random" {}
-
-# resource "random_pet" "random" {
-#   length = 1
 # }
 
 # resource "aws_db_instance" "education" {
